@@ -3,75 +3,77 @@ const calculadora = require("./calculadora");
 
 function mostrarMenu() {
   console.log(
-    "Bem vindo a calculadora do Reinald, escolha uma opção:\n1. Efetuar uma soma \n2. Efetuar uma subtração \n3. EFetuar uma multiplicação\n4. Efetuar uma divisão \n5. Efetuar um calculo de porcentagem\n6. Sair:  "
+    "Bem vindo à calculadora do Reinald, escolha uma opção:\n1. Efetuar uma soma \n2. Efetuar uma subtração \n3. Efetuar uma multiplicação\n4. Efetuar uma divisão \n5. Efetuar um cálculo de porcentagem\n6. Sair"
   );
-  let resultado = +prompt("Digite aqui a opção desejada:  ");
+  let resultado = +prompt("Digite aqui a opção desejada: ");
   return resultado;
 }
-resp = mostrarMenu();
-if (
-  resp == 1 ||
-  resp == 2 ||
-  resp == 3 ||
-  resp == 4 ||
-  resp == 5 ||
-  resp == 6
-) {
-  if (resp === 1) {
-    console.log("Bem vindo a soma !");
-    let n1 = +prompt("Digite o primeiro numero a ser somado: ");
-    let n2 = +prompt("Digite o segundo numero a ser somado: ");
-    let respSoma = calculadora.soma(n1, n2);
-    if (respSoma === typeof Number) {
-      console.log(respSoma);
+
+function isValidNumber(n) {
+  return !isNaN(n) && typeof n === 'number';
+}
+
+function processarOperacao(opcao) {
+  if (opcao === 1) {
+    console.log("Bem vindo à soma!");
+    let n1 = +prompt("Digite o primeiro número a ser somado: ");
+    let n2 = +prompt("Digite o segundo número a ser somado: ");
+    if (isValidNumber(n1) && isValidNumber(n2)) {
+      let respSoma = calculadora.soma(n1, n2);
+      console.log("Resultado:", respSoma);
     } else {
-      console.log("Digite numeros validos ! ");
+      console.log("Digite números válidos!");
     }
-  } else if (resp === 2) {
-    console.log("Bem vindo a subtração ! ");
-    let n3 = +prompt("Digite o primeiro numero a ser subtraido: ");
-    let n4 = +prompt("Digite o segundo numero a ser subtraido: ");
-    let respSub = calculadora.subtracao(n3, n4);
-    if (respSub == NaN) {
-      console.log(respSub);
+  } else if (opcao === 2) {
+    console.log("Bem vindo à subtração!");
+    let n3 = +prompt("Digite o primeiro número a ser subtraído: ");
+    let n4 = +prompt("Digite o segundo número a ser subtraído: ");
+    if (isValidNumber(n3) && isValidNumber(n4)) {
+      let respSub = calculadora.subtracao(n3, n4);
+      console.log("Resultado:", respSub);
     } else {
-      console.log("Digite numeros validos ! ");
+      console.log("Digite números válidos!");
     }
-  } else if (resp === 3) {
-    console.log("Bem vindo a Multiplicação ! ");
-    let n5 = +prompt("Digite o primeiro numero a ser multiplicado: ");
-    let n6 = +prompt("Digite o segundo numero a ser multiplicado: ");
-    let respMult = calculadora.multiplicacao(n5, n6);
-    if (respMult !== NaN) {
-      console.log(respMult);
+  } else if (opcao === 3) {
+    console.log("Bem vindo à multiplicação!");
+    let n5 = +prompt("Digite o primeiro número a ser multiplicado: ");
+    let n6 = +prompt("Digite o segundo número a ser multiplicado: ");
+    if (isValidNumber(n5) && isValidNumber(n6)) {
+      let respMult = calculadora.multiplicacao(n5, n6);
+      console.log("Resultado:", respMult);
     } else {
-      console.log("Digite numeros validos ! ");
+      console.log("Digite números válidos!");
     }
-  } else if (resp === 4) {
-    console.log("Bem vindo a Divisão ! ");
-    let n7 = +prompt("Digite o primeiro numero a ser dividido: ");
-    let n8 = +prompt("Digite o segundo numero a ser dividido: ");
-    let respDiv = calculadora.divisao(n7, n8);
-    if (respDiv !== NaN) {
-      console.log(respDiv);
+  } else if (opcao === 4) {
+    console.log("Bem vindo à divisão!");
+    let n7 = +prompt("Digite o primeiro número a ser dividido: ");
+    let n8 = +prompt("Digite o segundo número a ser dividido: ");
+    if (isValidNumber(n7) && isValidNumber(n8)) {
+      let respDiv = calculadora.divisao(n7, n8);
+      console.log("Resultado:", respDiv);
     } else {
-      console.log("Digite numeros validos ! ");
+      console.log("Digite números válidos!");
     }
-  } else if (resp === 5) {
-    console.log("Bem vindo a Porcentagem ! ");
-    let n9 = +prompt("digite quantos por cento quer saber: ");
-    let n10 = +prompt("digite de qual numero quer saber: ");
-    let respPor = calculadora.porcentagem(n9, n10);
-    if (respPor !== NaN) {
-      console.log(respPor);
+  } else if (opcao === 5) {
+    console.log("Bem vindo à porcentagem!");
+    let n9 = +prompt("Digite quantos por cento quer saber: ");
+    let n10 = +prompt("Digite de qual número quer saber: ");
+    if (isValidNumber(n9) && isValidNumber(n10)) {
+      let respPor = calculadora.porcentagem(n9, n10);
+      console.log("Resultado:", respPor);
     } else {
-      console.log("Digite numeros validos ! ");
+      console.log("Digite números válidos!");
     }
-  } else if (resp === 6) {
+  } else if (opcao === 6) {
     console.log("Saindo...");
     process.exit();
+  } else {
+    console.log("Digite uma opção válida!");
   }
-} else {
-  console.log("Digite uma opção valida");
 }
-mostrarMenu();
+
+while (true) {
+  let resp = mostrarMenu();
+  processarOperacao(resp);
+}
+
